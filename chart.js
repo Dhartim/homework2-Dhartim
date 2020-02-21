@@ -18,8 +18,9 @@ let drawParallelPlotChart = function(data){
     .attr("transform", translate(margin.left, margin.top));
 
   //get data from csv file
-  dimensions = d3.keys(data[0]).filter(function(d) { return d != "county" })
+  dimensions = d3.keys(data[0]).filter(function(d) { return d != "region" })
   console.log(dimensions);
+
   var y = {}
   for (i in dimensions) {
     name = dimensions[i]
@@ -34,11 +35,22 @@ let drawParallelPlotChart = function(data){
     .padding(1)
     .domain(dimensions)
 
-
   // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
     function path(d) {
         return d3.line()(dimensions.map(function(p) { return [x(p), y[p](d[p]) + margin.top ]; }));
     }
+//region -> colors
+// Color scale: give me a region name, I return a color
+  var color = d3.scaleOrdinal()
+  .domain(["1", "2", "3", "4"])
+  .range(["red", "blue", "green", "yellow"]);
+//   region Census region:
+// 1 = Northeast
+// 2 = Midwest
+// 3 = South
+// 4 = West
+  //.range("#8856a7");
+
 
     // Draw the lines
   svg
@@ -47,7 +59,7 @@ let drawParallelPlotChart = function(data){
     .enter().append("path")
     .attr("d",  path)
     .style("fill", "none")
-    .style("stroke", "#69b3a2")
+    .style("stroke", function(d){ return( color(d.region))})
     .style("opacity", 0.5)
 
 
