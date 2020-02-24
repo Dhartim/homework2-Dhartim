@@ -2,16 +2,18 @@ let drawParallelPlotChart = function(data){
   console.log(data);
   //create svg
   let margin = {
-    top:30,
+    top:20,
     right: 10,
     bottom: 10,
     left: 20
   };
-  let width = 960 - margin.left - margin.right;
-  let height = 500 - margin.top - margin.bottom;
+  let svg = d3.select("body").select(".parallel");
+  //plots for svg
+  let bounds = svg.node().getBoundingClientRect();
+  let width = bounds.width - margin.left - margin.right;
+  let height = bounds.height - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
-  let svg = d3.select("body").select("svg");
     svg.attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -44,14 +46,10 @@ let drawParallelPlotChart = function(data){
   var color = d3.scaleOrdinal()
   .domain(["1", "2", "3", "4"])
   .range(["red", "blue", "green", "yellow"]);
-//   region Census region:
-// 1 = Northeast
-// 2 = Midwest
-// 3 = South
-// 4 = West
-  //.range("#8856a7");
-
-
+  //red = 1- Northeast
+  //blue - 2 = Midwest
+  //green - 3 = South
+  //yellow - 4 = West
     // Draw the lines
   svg
     .selectAll("myPath")

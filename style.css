@@ -1,11 +1,19 @@
 body{
-  background-color: wheat;
-  padding: 5px;
+  margin: 10px;
+  padding: 0px;
 }
 
-svg
+.parallel
 {
+  font-family: Roboto;
+  width: 950px;
   height: 500px;
-  width: 960px;
   background-color: white;
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+}
+
+table.grades tbody tr td:nth-child(1),
+table.grades tbody tr td:nth-child(2) {
+  text-align: center;
 }

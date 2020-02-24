@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <!-- include d3.js modules -->
-    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <!-- <script src="https://d3js.org/d3-array.v2.min.js"></script> -->
     <script src="count.js"></script>
     <script src="chart.js"></script>
 
   </head>
   <body>
     <script type="text/javascript">
-       d3.csv("mrc_table2.csv", convertRow).then(drawParallelPlotChart);
+       d3.csv("dataset.csv", convertRow).then(drawParallelPlotChart);
     </script>
     <svg></svg>
   </body>
