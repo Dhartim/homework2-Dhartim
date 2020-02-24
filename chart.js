@@ -34,7 +34,7 @@ let drawParallelPlotChart = function(data){
   // Build the X scale -> it find the best position for each Y axis
   x = d3.scalePoint()
     .range([0, width])
-    .padding(1)
+    .padding(0.35)
     .domain(dimensions)
 
   // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
@@ -50,30 +50,30 @@ let drawParallelPlotChart = function(data){
   //legends
       svg.append("text")
         .attr("class", "text")
-        .attr("x", width - 120)
+        .attr("x", width - 60)
         .attr("y", margin.top)
         .text("Region")
         .attr("alignment-baseline","middle")
       svg.append("rect")
-        .attr("x", width - 120)
+        .attr("x", width - 60)
         .attr("y", margin.top /2 + 20)
         .attr("width", 15)
         .attr("height", 15)
         .style("fill", "red")
       svg.append("rect")
-          .attr("x", width - 120)
+          .attr("x", width - 60)
           .attr("y", margin.top + margin.right + 20)
           .attr("width", 15)
           .attr("height", 15)
           .style("fill", "blue")
       svg.append("rect")
-          .attr("x", width - 120)
+          .attr("x", width - 60)
           .attr("y", margin.top + margin.right + 40)
           .attr("width", 15)
           .attr("height", 15)
           .style("fill", "green")
       svg.append("rect")
-          .attr("x", width - 120)
+          .attr("x", width - 60)
           .attr("y", margin.top + margin.right + 60)
           .attr("width", 15)
           .attr("height", 15)
@@ -82,32 +82,32 @@ let drawParallelPlotChart = function(data){
           //text for legend
       svg.append("text")
       .attr("class", "legend-text")
-      .attr("x", width - 100)
+      .attr("x", width - 40)
       .attr("y", margin.top/2 + 30)
       .text("1-Northeast")
       .attr("alignment-baseline","middle")
       svg
       .append("text")
       .attr("class", "legend-text")
-      .attr("x", width - 100)
+      .attr("x", width - 40)
       .attr("y", margin.top + margin.right + 30)
       .text("2-Midwest")
       .attr("alignment-baseline","middle")
       svg
       .append("text")
       .attr("class", "legend-text")
-      .attr("x", width - 100)
+      .attr("x", width - 40)
       .attr("y", margin.top + margin.right + 50)
       .text("3-South")
       .attr("alignment-baseline","middle")
       svg
       .append("text")
       .attr("class", "legend-text")
-      .attr("x", width - 100)
+      .attr("x", width - 40)
       .attr("y", margin.top + margin.right + 70)
       .text("4-West")
       .attr("alignment-baseline","middle")
-      
+
     // Draw the lines
   svg
     .selectAll("myPath")
@@ -125,7 +125,7 @@ let drawParallelPlotChart = function(data){
     .data(dimensions).enter()
     .append("g")
     // I translate this element to its right position on the x axis
-    .attr("transform", function(d) { return "translate(" + x(d) + "," + margin.top + ")"; })
+    .attr("transform", function(d) { return translate(x(d), margin.top); })
     // And I build the axis with the call function
     .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
     // Add axis title
