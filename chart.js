@@ -46,10 +46,7 @@ let drawParallelPlotChart = function(data){
   var color = d3.scaleOrdinal()
   .domain(["1", "2", "3", "4"])
   .range(["red", "blue", "green", "yellow"]);
-  //red = 1- Northeast
-  //blue - 2 = Midwest
-  //green - 3 = South
-  //yellow - 4 = West
+
     // Draw the lines
   svg
     .selectAll("myPath")
@@ -72,10 +69,73 @@ let drawParallelPlotChart = function(data){
     .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
     // Add axis title
     .append("text")
+      .attr("class", "text")
       .style("text-anchor", "middle")
       .attr("y", -9)
       .text(function(d) { return d; })
       .style("fill", "black")
+
+  //add color legend
+  //legends
+      svg.append("text")
+        .attr("class", "text")
+        .attr("x", width - 120)
+        .attr("y", margin.top)
+        .text("Region")
+        .attr("alignment-baseline","middle")
+      svg.append("rect")
+        .attr("x", width - 120)
+        .attr("y", margin.top /2 + 20)
+        .attr("width", 15)
+        .attr("height", 15)
+        .style("fill", "red")
+      svg.append("rect")
+          .attr("x", width - 120)
+          .attr("y", margin.top + margin.right + 20)
+          .attr("width", 15)
+          .attr("height", 15)
+          .style("fill", "blue")
+      svg.append("rect")
+          .attr("x", width - 120)
+          .attr("y", margin.top + margin.right + 40)
+          .attr("width", 15)
+          .attr("height", 15)
+          .style("fill", "green")
+      svg.append("rect")
+          .attr("x", width - 120)
+          .attr("y", margin.top + margin.right + 60)
+          .attr("width", 15)
+          .attr("height", 15)
+          .style("fill", "yellow")
+
+          //text for legend
+      svg.append("text")
+      .attr("class", "legend-text")
+      .attr("x", width - 100)
+      .attr("y", margin.top/2 + 30)
+      .text("1-Northeast")
+      .attr("alignment-baseline","middle")
+      svg
+      .append("text")
+      .attr("class", "legend-text")
+      .attr("x", width - 100)
+      .attr("y", margin.top + margin.right + 30)
+      .text("2-Midwest")
+      .attr("alignment-baseline","middle")
+      svg
+      .append("text")
+      .attr("class", "legend-text")
+      .attr("x", width - 100)
+      .attr("y", margin.top + margin.right + 50)
+      .text("3-South")
+      .attr("alignment-baseline","middle")
+      svg
+      .append("text")
+      .attr("class", "legend-text")
+      .attr("x", width - 100)
+      .attr("y", margin.top + margin.right + 70)
+      .text("4-West")
+      .attr("alignment-baseline","middle")
 };
 
 function translate(x,y)
