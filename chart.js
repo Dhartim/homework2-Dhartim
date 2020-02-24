@@ -46,35 +46,6 @@ let drawParallelPlotChart = function(data){
   var color = d3.scaleOrdinal()
   .domain(["1", "2", "3", "4"])
   .range(["red", "blue", "green", "yellow"]);
-
-    // Draw the lines
-  svg
-    .selectAll("myPath")
-    .data(data)
-    .enter().append("path")
-    .attr("d",  path)
-    .style("fill", "none")
-    .style("stroke", function(d){ return( color(d.region))})
-    .style("opacity", 0.5)
-
-
-    // Draw the axis:
-  svg.selectAll("myAxis")
-    // For each dimension of the dataset I add a 'g' element:
-    .data(dimensions).enter()
-    .append("g")
-    // I translate this element to its right position on the x axis
-    .attr("transform", function(d) { return "translate(" + x(d) + "," + margin.top + ")"; })
-    // And I build the axis with the call function
-    .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
-    // Add axis title
-    .append("text")
-      .attr("class", "text")
-      .style("text-anchor", "middle")
-      .attr("y", -9)
-      .text(function(d) { return d; })
-      .style("fill", "black")
-
   //add color legend
   //legends
       svg.append("text")
@@ -136,6 +107,34 @@ let drawParallelPlotChart = function(data){
       .attr("y", margin.top + margin.right + 70)
       .text("4-West")
       .attr("alignment-baseline","middle")
+      
+    // Draw the lines
+  svg
+    .selectAll("myPath")
+    .data(data)
+    .enter().append("path")
+    .attr("d",  path)
+    .style("fill", "none")
+    .style("stroke", function(d){ return( color(d.region))})
+    .style("opacity", 0.5)
+
+
+    // Draw the axis:
+  svg.selectAll("myAxis")
+    // For each dimension of the dataset I add a 'g' element:
+    .data(dimensions).enter()
+    .append("g")
+    // I translate this element to its right position on the x axis
+    .attr("transform", function(d) { return "translate(" + x(d) + "," + margin.top + ")"; })
+    // And I build the axis with the call function
+    .each(function(d) { d3.select(this).call(d3.axisLeft().scale(y[d])); })
+    // Add axis title
+    .append("text")
+      .attr("class", "text")
+      .style("text-anchor", "middle")
+      .attr("y", -9)
+      .text(function(d) { return d; })
+      .style("fill", "black")
 };
 
 function translate(x,y)
